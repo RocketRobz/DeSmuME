@@ -26,6 +26,7 @@
 namespace ctrulib {
 
 	#include <3ds.h>
+	#include "svchax.h"
 
 }
 
@@ -121,6 +122,8 @@ int main(int argc, char **argv)
  	gfxSwapBuffersGpu();
 	gspWaitForVBlank();
 
+	osSetSpeedupEnable(false);
+   	svchax_init(true);
    	osSetSpeedupEnable(true);
 
 	gfx3d = new GFX3D;

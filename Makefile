@@ -145,7 +145,7 @@ SOURCES_CXX +=  armcpu.cpp \
 				arm-common/arm_gen.cpp \
 				arm-common/arm_jit.cpp
 
-CFILES		:= 3ds/heap.c 3ds/memory.c utils/ConvertUTF.c 
+CFILES		:= 3ds/svchax.c 3ds/heap.c 3ds/memory.c utils/ConvertUTF.c 
 CPPFILES	:=
 SFILES		:=
 PICAFILES	:=
