@@ -946,25 +946,25 @@ bool savestate_save(EMUFILE* outstream, int compressionLevel)
 #ifdef HAVE_JIT 
 	arm_jit_sync();
 #endif
-	#ifndef HAVE_LIBZ
+	/* #ifndef HAVE_LIBZ
 	compressionLevel = Z_NO_COMPRESSION;
-	#endif
+	#endif */
 
 	EMUFILE_MEMORY ms;
 	EMUFILE* os;
 	
-	if(compressionLevel != Z_NO_COMPRESSION)
+	/* if(compressionLevel != Z_NO_COMPRESSION)
 	{
 		//generate the savestate in memory first
 		os = (EMUFILE*)&ms;
 		writechunks(os);
 	}
 	else
-	{
+	{ */
 		os = outstream;
 		os->fseek(32,SEEK_SET); //skip the header
 		writechunks(os);
-	}
+	// }
 
 	//save the length of the file
 	u32 len = os->ftell();
@@ -973,7 +973,7 @@ bool savestate_save(EMUFILE* outstream, int compressionLevel)
 	u8* cbuf;
 
 	//compress the data
-	int error = Z_OK;
+	/* int error = Z_OK;
 	if(compressionLevel != Z_NO_COMPRESSION)
 	{
 		cbuf = ms.buf();
@@ -986,7 +986,7 @@ bool savestate_save(EMUFILE* outstream, int compressionLevel)
 		comprlen2 = comprlen;
 		error = compress2(cbuf,&comprlen2,ms.buf(),len,compressionLevel);
 		comprlen = (u32)comprlen2;
-	}
+	} */
 
 	//dump the header
 	outstream->fseek(0,SEEK_SET);
@@ -996,13 +996,14 @@ bool savestate_save(EMUFILE* outstream, int compressionLevel)
 	write32le(len,outstream); //uncompressed length
 	write32le(comprlen,outstream); //compressed length (-1 if it is not compressed)
 
-	if(compressionLevel != Z_NO_COMPRESSION)
+	/* if(compressionLevel != Z_NO_COMPRESSION)
 	{
 		outstream->fwrite((char*)cbuf,comprlen==(u32)-1?len:comprlen);
 		delete[] cbuf;
-	}
+	} */
 
-	return error == Z_OK;
+	// return error == Z_OK;
+	return true;
 }
 
 bool savestate_save (const char *file_name)
@@ -1304,7 +1305,8 @@ void rewindsave () {
 		ms = new EMUFILE_MEMORY(1024*1024*12);
 	}
 
-	if(!savestate_save(ms, Z_NO_COMPRESSION))
+	// if(!savestate_save(ms, Z_NO_COMPRESSION))
+	if(!savestate_save(ms, 0))
 		return;
 
 	rewindbuffer.push_back(ms);

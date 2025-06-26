@@ -6,7 +6,7 @@
 #include <malloc.h>
 #include "arm_gen.h"
 
-#ifdef _3DS
+#ifdef __3DS__
 
 #include <malloc.h>
 #include "3ds/memory.h"
@@ -27,7 +27,7 @@ static void __clear_cache(void *start, void *end) {
   sys_dcache_flush(start, len);
   sys_icache_invalidate(start, len);
 }
-#elif defined(_3DS)
+#elif defined(__3DS__)
 #undef __clear_cache
 #define __clear_cache(start,end)FlushInvalidateCache();
 #endif
@@ -35,7 +35,7 @@ static void __clear_cache(void *start, void *end) {
 namespace arm_gen
 {
 
-#ifdef _3DS
+#ifdef __3DS__
 uint32_t* _instructions = 0;
 #endif
 
@@ -56,7 +56,7 @@ code_pool::code_pool(uint32_t icount) :
       fprintf(stderr, "posix_memalign failed\n");
       abort();
    }
-#elif defined(_3DS)
+#elif defined(__3DS__)
    if(!_instructions){
       _instructions = (uint32_t*)memalign(4096, instruction_count * 4);
       if (!_instructions)
@@ -76,7 +76,7 @@ code_pool::code_pool(uint32_t icount) :
    }
 #endif
 
-#ifndef _3DS
+#ifndef __3DS__
    if (mprotect(instructions, instruction_count * 4, PROT_READ | PROT_WRITE | PROT_EXEC))
    {
       fprintf(stderr, "mprotect failed\n");
@@ -87,7 +87,7 @@ code_pool::code_pool(uint32_t icount) :
 
 code_pool::~code_pool()
 {
-   #ifdef _3DS
+   #ifdef __3DS__
    //ReprotectMemory((unsigned int*)instructions, (instruction_count * 4) / 4096, 3);
    #else
    mprotect(instructions, instruction_count * 4, PROT_READ | PROT_WRITE);

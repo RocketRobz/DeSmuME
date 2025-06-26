@@ -36,7 +36,7 @@
 #include <pspthreadman.h> 
 #elif defined(VITA)
 #include <psp2/kernel/threadmgr.h>
-#elif defined(_3DS)
+#elif defined(__3DS__)
 #include <3ds.h>
 #else
 #include <time.h>
@@ -57,7 +57,7 @@
 #include <retro_inline.h>
 
 #ifndef PATH_MAX_LENGTH
-#if defined(_XBOX1) || defined(_3DS) || defined(PSP) || defined(GEKKO)
+#if defined(_XBOX1) || defined(__3DS__) || defined(PSP) || defined(GEKKO)
 #define PATH_MAX_LENGTH 512
 #else
 #define PATH_MAX_LENGTH 4096
@@ -91,7 +91,7 @@ static INLINE void retro_sleep(unsigned msec)
    sys_timer_usleep(1000 * msec);
 #elif defined(PSP) || defined(VITA)
    sceKernelDelayThread(1000 * msec);
-#elif defined(_3DS)
+#elif defined(__3DS__)
    svcSleepThread(1000000 * (s64)msec);
 #elif defined(_WIN32)
    Sleep(msec);

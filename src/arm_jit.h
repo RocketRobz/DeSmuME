@@ -39,7 +39,7 @@ template<int PROCNUM> u32 arm_jit_compile();
 struct JIT_struct 
 {
 	// only include the memory types that code can execute from
-	#ifdef _3DS
+	#ifdef __3DS__
 	uintptr_t MAIN_MEM[4*1024*1024/2];
 	#else
 	uintptr_t MAIN_MEM[16*1024*1024/2];

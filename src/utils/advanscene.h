@@ -24,7 +24,7 @@ class ADVANsCEne
 {
 private:
 	std::string database_path;
-	time_t			createTime;
+	u32				createTime;
 	u32				crc32;
 	char			serial[6];
 	char			version[4];

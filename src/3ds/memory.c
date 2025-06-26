@@ -1,5 +1,4 @@
 #include <3ds.h>
-#include "svchax.h"
 
 s32 __patchSVC() {
     __asm__ volatile("cpsid aif");
@@ -31,8 +30,8 @@ void FlushInvalidateCache() {
 }
 
 Result ReprotectMemory(u32* addr, u32 pages, u32 mode) {
-    if(!__ctr_svchax_srv)
-        return 0xFFFFFFFF;
+    // if(!__ctr_svchax_srv)
+    //    return 0xFFFFFFFF;
 
     Handle processHandle;
     svcDuplicateHandle(&processHandle, 0xFFFF8001);

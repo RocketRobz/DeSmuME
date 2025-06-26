@@ -44,14 +44,14 @@ ARCH	:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard
 CFLAGS	:=	-g -Wall -O2 -mword-relocations -Wfatal-errors \
 			-fomit-frame-pointer  $(ARCH)
 
-CFLAGS	+=	$(INCLUDE) -DARM11 -D_3DS -DHAVE_LIBZ -DHAVE_JIT
+CFLAGS	+=	$(INCLUDE) -D__3DS__ -DHAVE_JIT
 
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -fpermissive
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:=  -lctru -lm -lstdc++ -lz
+LIBS	:=  -lctru -lm -lstdc++
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -145,7 +145,7 @@ SOURCES_CXX +=  armcpu.cpp \
 				arm-common/arm_gen.cpp \
 				arm-common/arm_jit.cpp
 
-CFILES		:= 3ds/svchax.c 3ds/heap.c 3ds/memory.c utils/ConvertUTF.c 
+CFILES		:= 3ds/heap.c 3ds/memory.c utils/ConvertUTF.c 
 CPPFILES	:=
 SFILES		:=
 PICAFILES	:=

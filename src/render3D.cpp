@@ -251,7 +251,7 @@ void* Render3D::operator new(size_t size)
 	void *newPtr = malloc_alignedCacheLine(size);
 	if (newPtr == NULL)
 	{
-		#ifdef _3DS
+		#ifdef __3DS__
 			exit(1);
 		#else
 			throw std::bad_alloc();

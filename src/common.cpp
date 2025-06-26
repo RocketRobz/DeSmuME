@@ -26,7 +26,6 @@
 #include <string.h>
 #include <string>
 #include <stdarg.h>
-#include <zlib.h>
 #include <stdlib.h>
 #include <map>
 

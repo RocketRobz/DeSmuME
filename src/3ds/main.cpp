@@ -18,6 +18,7 @@
 * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 * Boston, MA 02111-1307, USA.
 */
+#include <sys/stat.h>
 #include <stdio.h>
 
 
@@ -25,7 +26,6 @@
 namespace ctrulib {
 
 	#include <3ds.h>
-	#include "svchax.h"
 
 }
 
@@ -121,8 +121,6 @@ int main(int argc, char **argv)
  	gfxSwapBuffersGpu();
 	gspWaitForVBlank();
 
-	osSetSpeedupEnable(false);
-   	svchax_init(true);
    	osSetSpeedupEnable(true);
 
 	gfx3d = new GFX3D;

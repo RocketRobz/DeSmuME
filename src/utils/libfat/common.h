@@ -56,7 +56,7 @@
 #elif defined(GBA)
    #include <gba_types.h>
    #include <disc_io.h>
-#elif defined(_3DS)
+#elif defined(__3DS__)
   #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
@@ -79,7 +79,7 @@
    #define DEFAULT_SECTORS_PAGE 64
    #define USE_LWP_LOCK
    #define USE_RTC_TIME
-#elif defined (NDS) || defined (_3DS)
+#elif defined (NDS) || defined (__3DS__)
    #define DEFAULT_CACHE_PAGES 4
    #define DEFAULT_SECTORS_PAGE 8
    #define USE_RTC_TIME

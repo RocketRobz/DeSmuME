@@ -27,7 +27,7 @@
 		#include "windows/winutil.h"
 		#include "windows/resource.h"
 	#endif
-#elif !defined(DESMUME_COCOA) && !defined(_3DS)
+#elif !defined(DESMUME_COCOA) && !defined(__3DS__)
 	#include <glib.h>
 #endif /* HOST_WINDOWS */
 
@@ -154,7 +154,7 @@ public:
 		std::string pathStr = Path::GetFileDirectoryPath(path);
 
 		strncpy(pathToModule, pathStr.c_str(), MAX_PATH);
-#elif defined(_3DS)
+#elif defined(__3DS__)
 		strncpy(pathToModule, "desmume", MAX_PATH);
 #else
 		char *cwd = g_build_filename(g_get_user_config_dir(), "desmume", NULL);

@@ -7179,7 +7179,7 @@ GPUSubsystem::GPUSubsystem()
 	
 	_willAutoResolveToCustomBuffer = true;
 	
-	#ifndef _3DS
+	#ifndef __3DS__
 	OSDCLASS *previousOSD = osd;
 	osd = new OSDCLASS(-1);
 	delete previousOSD;
@@ -7217,7 +7217,7 @@ GPUSubsystem::GPUSubsystem()
 
 GPUSubsystem::~GPUSubsystem()
 {
-	#ifndef _3DS
+	#ifndef __3DS__
 	delete osd;
 	osd = NULL;
 	#endif
@@ -7295,7 +7295,7 @@ void GPUSubsystem::Reset()
 	this->_engineSub->Reset();
 	
 	DISP_FIFOreset();
-	#ifndef _3DS
+	#ifndef __3DS__
 	osd->clear();
 	#endif
 }

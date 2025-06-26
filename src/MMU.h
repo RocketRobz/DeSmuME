@@ -366,7 +366,7 @@ struct MMU_struct
 
 	//u8 MAIN_MEM[4*1024*1024]; //expanded from 4MB to 8MB to support debug consoles
 	//u8 MAIN_MEM[8*1024*1024]; //expanded from 8MB to 16MB to support dsi
-	#ifdef _3DS
+	#ifdef __3DS__
 	u8 MAIN_MEM[4*1024*1024];
 	#else
 	u8 MAIN_MEM[16*1024*1024]; //expanded from 8MB to 16MB to support dsi
