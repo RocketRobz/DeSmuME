@@ -10,6 +10,18 @@ TOPDIR ?= $(CURDIR)
 include $(DEVKITARM)/3ds_rules
 
 #---------------------------------------------------------------------------------
+# External tools
+#---------------------------------------------------------------------------------
+MAKEROM 	?= makerom
+
+#---------------------------------------------------------------------------------
+# Version number
+#---------------------------------------------------------------------------------
+
+VERSION_MAJOR := 0
+VERSION_MINOR := 1
+VERSION_MICRO := 0
+#---------------------------------------------------------------------------------
 # TARGET is the name of the output
 # BUILD is the directory where object files & intermediate files will be placed
 # SOURCES is a list of directories containing source code
@@ -220,14 +232,12 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-ifeq ($(strip $(NO_SMDH)),)
-$(OUTPUT).3dsx	:	$(OUTPUT).elf $(OUTPUT).smdh
-else
-$(OUTPUT).3dsx	:	$(OUTPUT).elf
-endif
+all: $(OUTPUT).cia $(OUTPUT).elf $(OUTPUT).3dsx
 
 $(OUTPUT).elf	:	$(OFILES)
 
+$(OUTPUT).cia	:	$(OUTPUT).elf $(OUTPUT).smdh
+	$(MAKEROM) -f cia -target t -exefslogo -o "../3DeSmuME.cia" -elf "../3DeSmuME.elf" -rsf "../cia.rsf" -banner "../banner.bnr" -icon "../icon.icn" -logo "../logo.bcma.lz" -DAPP_ROMFS="$(TOPDIR)/$(ROMFS)" -major $(VERSION_MAJOR) -minor $(VERSION_MINOR) -micro $(VERSION_MICRO) -DAPP_VERSION_MAJOR="$(VERSION_MAJOR)"
 #---------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #---------------------------------------------------------------------------------
