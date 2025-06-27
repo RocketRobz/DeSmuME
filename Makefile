@@ -238,6 +238,8 @@ $(OUTPUT).elf	:	$(OFILES)
 
 $(OUTPUT).cia	:	$(OUTPUT).elf $(OUTPUT).smdh
 	$(MAKEROM) -f cia -target t -exefslogo -o "../3DeSmuME.cia" -elf "../3DeSmuME.elf" -rsf "../cia.rsf" -banner "../banner.bnr" -icon "../icon.icn" -logo "../logo.bcma.lz" -DAPP_ROMFS="$(TOPDIR)/$(ROMFS)" -major $(VERSION_MAJOR) -minor $(VERSION_MINOR) -micro $(VERSION_MICRO) -DAPP_VERSION_MAJOR="$(VERSION_MAJOR)"
+	
+$(OUTPUT).3dsx  :	$(OUTPUT).elf
 #---------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
 #---------------------------------------------------------------------------------
