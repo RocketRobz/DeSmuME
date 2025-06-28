@@ -1,5 +1,5 @@
 #ifndef __SVCHAX_H__
-#define _SVCHAX_H__
+#define __SVCHAX_H__
 
 /*
  * for 3DSX builds, svchax_init expects that:
@@ -44,4 +44,4 @@ extern u32 __ctr_svchax_srv;
 #endif
 
 
-#endif //_SVCHAX_H__
+#endif //__SVCHAX_H__
