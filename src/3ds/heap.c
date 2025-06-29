@@ -2,6 +2,7 @@
 #include <3ds/svc.h>
 #include <3ds/env.h>
 #include <3ds/os.h>
+#include <3ds/allocator/mappable.h>
 
 extern char* fake_heap_start;
 extern char* fake_heap_end;
@@ -30,6 +31,9 @@ void __system_allocateHeaps(void) {
 
 	// Allocate the linear heap
 	svcControlMemory(&__ctru_linear_heap, 0x0, 0x0, __ctru_linear_heap_size, MEMOP_ALLOC_LINEAR, MEMPERM_READ | MEMPERM_WRITE);
+
+	/* Mappable allocator init */
+	mappableInit(OS_MAP_AREA_BEGIN, OS_MAP_AREA_END);
 
 	// Set up newlib heap
 	fake_heap_start = (char*)__ctru_heap;
